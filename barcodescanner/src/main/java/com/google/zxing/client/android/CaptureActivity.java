@@ -110,6 +110,8 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
   private TextView statusView;
   private Button flipButton;
   private Button torchButton;
+  private View backButton;
+  private View manualButton;
   private View resultView;
   private Result lastResult;
   private boolean hasSurface;
@@ -193,6 +195,24 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     statusView = (TextView) findViewById(R.id.status_view);
     flipButton = (Button) findViewById(R.id.flip_button);
     torchButton = (Button) findViewById(R.id.torch_button);
+    backButton = findViewById(R.id.back_button);
+    manualButton = findViewById(R.id.button_manual_input);
+
+    backButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        setResult(101);
+        finish();
+      }
+    });
+
+    manualButton.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        setResult(RESULT_CANCELED);
+        finish();
+      }
+    });
 
     handler = null;
     lastResult = null;
@@ -826,20 +846,20 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     lastResult = null;
 
     // in case the device has multiple camera's and we want to show the flip button: show the flip button :)
-    if (getIntent().getBooleanExtra(Intents.Scan.SHOW_FLIP_CAMERA_BUTTON, false)) {
-      if (Camera.getNumberOfCameras() > 1) {
-        flipButton.setVisibility(View.VISIBLE);
-        flipButton.setOnClickListener(new Button.OnClickListener() {
-          @Override
-          public void onClick(View v) {
-            final int reqCamId = getIntent().getIntExtra(Intents.Scan.CAMERA_ID, OpenCameraInterface.NO_REQUESTED_CAMERA);
-            getIntent().putExtra(Intents.Scan.CAMERA_ID, reqCamId == 1 ? 0 : 1);
-            getIntent().putExtra(Intents.Scan.SHOW_FLIP_CAMERA_BUTTON, true);
-            recreate();
-          }
-        });
-      }
-    }
+//    if (getIntent().getBooleanExtra(Intents.Scan.SHOW_FLIP_CAMERA_BUTTON, false)) {
+//      if (Camera.getNumberOfCameras() > 1) {
+//        flipButton.setVisibility(View.VISIBLE);
+//        flipButton.setOnClickListener(new Button.OnClickListener() {
+//          @Override
+//          public void onClick(View v) {
+//            final int reqCamId = getIntent().getIntExtra(Intents.Scan.CAMERA_ID, OpenCameraInterface.NO_REQUESTED_CAMERA);
+//            getIntent().putExtra(Intents.Scan.CAMERA_ID, reqCamId == 1 ? 0 : 1);
+//            getIntent().putExtra(Intents.Scan.SHOW_FLIP_CAMERA_BUTTON, true);
+//            recreate();
+//          }
+//        });
+//      }
+//    }
 
     if (getIntent().getBooleanExtra(Intents.Scan.SHOW_TORCH_BUTTON, false)) {
       // only draw the button in case we're using the back camera
