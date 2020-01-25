@@ -65,6 +65,7 @@
   <string name="msg_default_format">Format</string>
   <string name="msg_default_meta">Metadata</string>
   <string name="msg_default_mms_subject">Hi</string>
+  <string name="msg_capture_title">Attach Gekkoin Wallet</string>
   <string name="msg_default_status">Place a barcode inside the viewfinder rectangle to scan it.</string>
   <string name="msg_default_time">Time</string>
   <string name="msg_default_type">Type</string>
@@ -141,5 +142,5 @@
   <string name="sbc_name">Google Book Search</string>
   <string name="wifi_changing_network">Requesting connection to network\u2026</string>
     <string name="enter_code_manually">Enter code manually</string>
-  <string name="scan_code">Scan code</string>
+  <string name="scan_code">Scan QR</string>
 </resources>

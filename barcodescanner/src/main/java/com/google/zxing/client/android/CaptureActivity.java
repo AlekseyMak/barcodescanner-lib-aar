@@ -21,8 +21,11 @@ import android.content.Context;
 import android.content.pm.FeatureInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.hardware.Camera;
-import android.support.v4.content.LocalBroadcastManager;
+
+import android.graphics.Color;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.widget.Button;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
@@ -68,6 +71,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -838,7 +843,19 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     if (customPromptMessage != null) {
       statusView.setText(customPromptMessage);
     } else {
-      statusView.setText(R.string.msg_default_status);
+//      statusView.setText(R.string.msg_default_status);
+
+//      TextView statusText = findViewById(R.id.status_view);
+      SpannableStringBuilder spannableStringBuilder = new SpannableStringBuilder();
+      spannableStringBuilder.append("1. Log in to gekkoin.com on your PC\n");
+      spannableStringBuilder.append("2. Go to \"Settings\" -> \"Attach Gekkard Card\"\n");
+      spannableStringBuilder.append("3. Scan QR-code\n");
+      spannableStringBuilder.setSpan(new ForegroundColorSpan(Color.WHITE), 13, 25, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+      spannableStringBuilder.setSpan(new ForegroundColorSpan(Color.WHITE), 46, 54, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+      spannableStringBuilder.setSpan(new ForegroundColorSpan(Color.WHITE), 56, 57, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+      spannableStringBuilder.setSpan(new ForegroundColorSpan(Color.WHITE), 60, 79, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+
+      statusView.setText(spannableStringBuilder);
     }
 
     statusView.setVisibility(View.VISIBLE);
